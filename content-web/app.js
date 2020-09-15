@@ -7,13 +7,15 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, 'dist/content-web')));
 const contentApiUrl = process.env.CONTENT_API_URL;
-
+console.log(contentApiUrl)
 
 function getSessions(cb) {
   request(contentApiUrl + '/sessions', function (err, response, body) {
     if (err) {
       return cb(err);
     }
+    console.log('calling sessions' + contentApiUrl + '/sessions')
+
     const data = JSON.parse(body); // Note: ASSUME: valid JSON
     cb(null, data);
   });
@@ -73,7 +75,7 @@ app.get('/api/stats', function (req, res) {
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/content-web/index.html'));
 });
-const port = process.env.PORT || '3000';
+const port = process.env.PORT || '3010';
 app.set('port', port);
 
 const server = http.createServer(app);
