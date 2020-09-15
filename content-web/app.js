@@ -12,6 +12,8 @@ console.log(contentApiUrl)
 function getSessions(cb) {
   request(contentApiUrl + '/sessions', function (err, response, body) {
     if (err) {
+      console.log('failed calling sessions' + contentApiUrl + '/sessions' + err)
+
       return cb(err);
     }
     console.log('calling sessions' + contentApiUrl + '/sessions')
@@ -24,6 +26,7 @@ function getSessions(cb) {
 function getSpeakers(cb) {
   request(contentApiUrl + '/speakers', function (err, response, body) {
     if (err) {
+      console.log('failed calling speakers' + contentApiUrl + '/sessions' + err)
       return cb(err);
     }
     const data = JSON.parse(body); // Note: ASSUME: valid JSON
@@ -44,8 +47,10 @@ function stats(cb) {
 app.get('/api/speakers', function (req, res) {
   getSpeakers(function (err, result) {
     if (!err) {
+      console.log(' api calling speakers' + contentApiUrl + '/sessions' + err)
       res.send(result);
     } else {
+      console.log('failed api calling speakers' + contentApiUrl + '/sessions' + err)
       res.send(err);
     }
   });
@@ -53,8 +58,10 @@ app.get('/api/speakers', function (req, res) {
 app.get('/api/sessions', function (req, res) {
   getSessions(function (err, result) {
     if (!err) {
+      console.log(' api calling sessions' + contentApiUrl + '/sessions' + err)
       res.send(result);
     } else {
+      console.log(' failed api calling sessions' + contentApiUrl + '/sessions' + err)
       res.send(err);
     }
   });
