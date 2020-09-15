@@ -75,7 +75,7 @@ app.get('/api/stats', function (req, res) {
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/content-web/index.html'));
 });
-const port = process.env.PORT || '3010';
+const port = process.env.PORT || '3000';
 app.set('port', port);
 
 const server = http.createServer(app);
